@@ -29,30 +29,27 @@ import java.util.*;
                 }
 
                 JSONArray jsonArray = new JSONArray();
-                String[] var10 = alphaTable;
-                int var11 = alphaTable.length;
+                int length = alphaTable.length;
 
-                for(int var12 = 0; var12 < var11; ++var12) {
-                    String firstLetter = var10[var12];
+                for(int i = 0; i < length; i++) {
+                    String firstLetter = alphaTable[i];
                     JSONObject object = new JSONObject();
                     List<JSONObject> jsonObjects = new ArrayList();
 
-                    for(int i = 0; i < tList.size(); ++i) {
+                    for(int j = 0; j < tList.size(); j++) {
                         if (this.toPinyin(classDeclaredMethod.invoke(tList.get(i)).toString().substring(0, 1).toUpperCase()).equals(firstLetter)) {
                             JSONObject jsonObject = new JSONObject();
 
-                            for(int j = 0; j < args.length; ++j) {
-                                String fieldName = args[j];
+                            for(int k = 0; k < args.length; k++) {
+                                String fieldName = args[k];
                                 String getMethodName = "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
                                 List<String> fieldNames = new ArrayList();
-                                Field[] var22 = aClass.getDeclaredFields();
-                                int var23 = var22.length;
-
-                                for(int var24 = 0; var24 < var23; ++var24) {
-                                    Field field1 = var22[var24];
+                                Field[] fields = aClass.getDeclaredFields();
+                                int fieldLength = fields.length;
+                                for(int l = 0; l < fieldLength; l++) {
+                                    Field field1 = fields[l];
                                     fieldNames.add(field1.getName());
                                 }
-
                                 if (!fieldNames.contains(fieldName)) {
                                     String fieldValue = aClass.getSuperclass().getDeclaredMethod(getMethodName).invoke(tList.get(i)).toString();
                                     jsonObject.put(fieldName, fieldValue);
@@ -89,7 +86,7 @@ import java.util.*;
             char[] chars = originHanCharacter.trim().replaceAll(" ", "").toCharArray();
             String pinyin = "";
 
-            for(int i = 0; i < chars.length; ++i) {
+            for(int i = 0; i < chars.length; i++) {
                 if (chars[i] > 128) {
                     try {
                         pinyin = pinyin + PinyinHelper.getShortPinyin(chars[i] + "").toUpperCase();
@@ -121,10 +118,10 @@ import java.util.*;
 
                             try {
                                 return collator.compare(finalMethod.invoke(o1), finalMethod.invoke(o2));
-                            } catch (IllegalAccessException var6) {
-                                var6.printStackTrace();
-                            } catch (InvocationTargetException var7) {
-                                var7.printStackTrace();
+                            } catch (IllegalAccessException e) {
+                                e.printStackTrace();
+                            } catch (InvocationTargetException e) {
+                                e.printStackTrace();
                             }
 
                             return -1;
@@ -132,8 +129,8 @@ import java.util.*;
                     });
                     return list;
                 }
-            } catch (NoSuchMethodException var6) {
-                var6.printStackTrace();
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
                 return new ArrayList();
             }
         }
