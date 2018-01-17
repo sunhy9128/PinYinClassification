@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.xiaoniu.tools:be_dt_convert:1.5.1_d13_29">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/xiaoniu/tools/be_dt_convert/1.5.1_d13_29/be_dt_convert-1.5.1_d13_29.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/xiaoniu/tools/be_dt_convert/1.5.1_d13_29/be_dt_convert-1.5.1_d13_29-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/xiaoniu/tools/be_dt_convert/1.5.1_d13_29/be_dt_convert-1.5.1_d13_29-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
