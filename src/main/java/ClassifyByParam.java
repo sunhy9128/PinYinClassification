@@ -15,12 +15,12 @@ public class ClassifyByParam {
     public ClassifyByParam() {
     }
 
-    public <T> AppMessage classifyByFirstLetter(List<T> list, String field, String... args) {
+        public <T> AppMessage classifyByFirstLetter(List<T> list, String field, String... args) {
         try {
             Class<?> aClass = list.get(0).getClass();
             String ffield = field.substring(0, 1).toUpperCase() + field.substring(1);
             Method classDeclaredMethod = aClass.getDeclaredMethod("get" + ffield);
-            String[] alphaTable = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+            String[] alphaTable = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
             List<T> tList = this.sortList(list, field);
             if (tList == null) {
                 return AppMessage.error("1", new Object[0]);
@@ -37,9 +37,10 @@ public class ClassifyByParam {
                 String firstLetter = alphaTable[i];
                 JSONObject object = new JSONObject();
                 List<JSONObject> jsonObjects = new ArrayList();
-
-                for (int j = 0; j < tList.size(); j++) {
-                    if (this.toPinyin(classDeclaredMethod.invoke(tList.get(i)).toString().substring(0, 1).toUpperCase()).equals(firstLetter)) {
+                Iterator<T> iterator = tList.iterator();
+                while (iterator.hasNext()) {
+                    T next = iterator.next();
+                    if (this.toPinyin(classDeclaredMethod.invoke(next).toString().substring(0, 1).toUpperCase()).equals(firstLetter)) {
                         JSONObject jsonObject = new JSONObject();
 
                         for (int k = 0; k < args.length; k++) {
@@ -53,19 +54,28 @@ public class ClassifyByParam {
                                 fieldNames.add(field1.getName());
                             }
                             if (!fieldNames.contains(fieldName)) {
-                                Object fieldValue = aClass.getSuperclass().getDeclaredMethod(getMethodName).invoke(tList.get(i));
+                                Object fieldValue = aClass.getSuperclass().getDeclaredMethod(getMethodName).invoke(next);
                                 jsonObject.put(fieldName, fieldValue.toString());
                             } else {
                                 Method fieldMethod = aClass.getDeclaredMethod(getMethodName);
-                                Object fieldValue = fieldMethod.invoke(tList.get(i));
+                                Object fieldValue = fieldMethod.invoke(next);
                                 if (fieldValue != null && BaseEntity.class.isAssignableFrom(fieldValue.getClass())) {
-                                    Field[] fields1 = fieldValue.getClass().getFields();
+                                    Field[] fields1 = fieldValue.getClass().getSuperclass().getDeclaredFields();
                                     for (Field field1 : fields1) {
-                                        String get = "get" + field1.getName().substring(0, 1).toUpperCase() + fieldName.substring(1);
-                                        jsonObject.put(field1.getName() + "." + field1.getName(), fieldValue.getClass().getDeclaredMethod(get).invoke(fieldValue).toString());
+                                        String get = "get" + field1.getName().substring(0, 1).toUpperCase() + field1.getName().substring(1);
+                                        Annotation[] declaredAnnotations = field1.getDeclaredAnnotations();
+                                        if (fieldValue.getClass().getSuperclass().getDeclaredMethod(get).invoke(fieldValue) == null) {
+                                            jsonObject.put(fieldName + "." + field1.getName(), null);
+                                        } else {
+                                            long count = Arrays.asList(declaredAnnotations).stream().filter(n -> n instanceof OneToMany).count();
+                                            if (count == 0 && !BaseEntity.class.isAssignableFrom(fieldValue.getClass().getSuperclass().getDeclaredMethod(get).invoke(fieldValue).getClass())) {
+                                                jsonObject.put(fieldName + "." + field1.getName(), fieldValue.getClass().getSuperclass().getDeclaredMethod(get).invoke(fieldValue));
+                                            }
+                                        }
                                     }
+                                } else {
+                                    jsonObject.put(fieldName, fieldValue);
                                 }
-                                jsonObject.put(fieldName, fieldValue.toString());
                             }
                         }
 
