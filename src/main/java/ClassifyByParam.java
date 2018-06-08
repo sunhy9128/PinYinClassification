@@ -5,6 +5,8 @@ import com.github.stuxuhai.jpinyin.PinyinHelper;
 import com.xiaoniu.core.base.BaseEntity;
 import com.xiaoniu.core.support.AppMessage;
 
+import javax.persistence.OneToMany;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
