@@ -33,7 +33,7 @@ public class ClassifyByParam {
                 return AppMessage.successdata("0", "", new Object[0]);
             }
 
-            List jsonArray = new ArrayList();
+            List returnList = new ArrayList();
             int length = alphaTable.length;
             List<JSONObject> finalList = new ArrayList<>();
             list.forEach(n -> finalList.add(getInvoke(n.getClass(), args, n)));
@@ -72,10 +72,10 @@ public class ClassifyByParam {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("firstLetter", entry.getKey());
                     jsonObject.put("list", entry.getValue());
-                    jsonArray.add(jsonObject);
+                    returnList.add(jsonObject);
                 }
             }
-            return AppMessage.successdata("0", sortList(jsonArray,"firstLetter",1), new Object[0]);
+            return AppMessage.successdata("0", sortList(returnList,"firstLetter",1), new Object[0]);
 //
         } catch (Exception e) {
             e.fillInStackTrace();
