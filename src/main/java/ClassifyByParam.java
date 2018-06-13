@@ -41,7 +41,7 @@ public class ClassifyByParam {
             Iterator<JSONObject> iterator = finalList.iterator();
             while (iterator.hasNext()) {
                 JSONObject next = iterator.next();
-                if (next.get(flag) != null) {
+                if (next.get(flag) != null&&!next.get(flag).toString().isEmpty()) {
                     for (int i = 0; i < length; i++) {
                         if (this.toPinyin(next.get(flag).toString().substring(0, 1).toUpperCase()).equals(alphaTable[i])) {
                             List<JSONObject> tmp;
