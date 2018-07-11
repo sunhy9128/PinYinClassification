@@ -157,13 +157,10 @@ public class ClassifyByParam {
                 String fieldName = args.get(k);
                 String getMethodName = "get" + fieldName.substring(0, 1).toUpperCase() + fieldName.substring(1);
                 List<String> fieldNames = new ArrayList();
-                Field[] fields = aClass.getDeclaredFields();
+                Field[] fields = aClass.getSuperclass().getDeclaredFields();
                 int fieldLength = fields.length;
-                for (int l = 0; l < fieldLength; l++) {
-                    Field field1 = fields[l];
-                    fieldNames.add(field1.getName());
-                }
-                if (!fieldNames.contains(fieldName)) {
+                Arrays.asList(fields).forEach(n->fieldNames.add(n.getName()));
+                if (fieldNames.contains(fieldName)) {
                     Object fieldValue = aClass.getSuperclass().getDeclaredMethod(getMethodName).invoke(next);
                     jsonObject.put(fieldName, fieldValue.toString());
                 } else {
