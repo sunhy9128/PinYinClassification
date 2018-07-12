@@ -14,17 +14,14 @@ import java.text.Collator;
 import java.util.*;
 
 public class ClassifyByParam {
-    public ClassifyByParam() {
-    }
 
     public <T> AppMessage classify(List<T> list, String flag, List<String> args) {
         try {
             Class<?> aClass = list.get(0).getClass();
             String ffield = flag.substring(0, 1).toUpperCase() + flag.substring(1);
             Method classDeclaredMethod = aClass.getDeclaredMethod("get" + ffield);
-            String[] alphaTable = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-
-//            List<T> tList = this.sortList(list, flag);
+            String[] alphaTable = new String[]{"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "#"};
+            String[] figureTable = new String[]{"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"};
             if (list == null) {
                 return AppMessage.error("1", new Object[0]);
             }
@@ -33,7 +30,7 @@ public class ClassifyByParam {
                 return AppMessage.successdata("0", "", new Object[0]);
             }
 
-            List returnList = new ArrayList();
+            List jsonArray = new ArrayList();
             int length = alphaTable.length;
             List<JSONObject> finalList = new ArrayList<>();
             list.forEach(n -> finalList.add(getInvoke(n.getClass(), args, n)));
@@ -41,29 +38,40 @@ public class ClassifyByParam {
             Iterator<JSONObject> iterator = finalList.iterator();
             while (iterator.hasNext()) {
                 JSONObject next = iterator.next();
-                if (next.get(flag) != null&&!next.get(flag).toString().isEmpty()) {
-                    for (int i = 0; i < length; i++) {
-                        if (this.toPinyin(next.get(flag).toString().substring(0, 1).toUpperCase()).equals(alphaTable[i])) {
-                            List<JSONObject> tmp;
-                            if (map.containsKey(alphaTable[i])) {
-                                tmp = map.get(alphaTable[i]);
-                            } else {
-                                tmp = new ArrayList<>();
+                if (next.get(flag) != null && !next.get(flag).toString().isEmpty()) {
+                    String first = this.toPinyin(next.get(flag).toString().substring(0, 1).toUpperCase());
+                    if (!Arrays.asList(figureTable).contains(first) && Arrays.asList(alphaTable).contains(first)) {
+                        for (int i = 0; i < length; i++) {
+                            if (first.equals(alphaTable[i])) {
+                                List<JSONObject> tmp;
+                                if (map.containsKey(alphaTable[i])) {
+                                    tmp = map.get(alphaTable[i]);
+                                } else {
+                                    tmp = new ArrayList<>();
+                                }
+                                tmp.add(next);
+                                map.put(alphaTable[i], tmp);
                             }
-                            tmp.add(next);
-                            map.put(alphaTable[i], tmp);
                         }
+                    } else {
+                        List<JSONObject> tmp;
+                        if (map.containsKey("#")) {
+                            tmp = map.get("#");
+                        } else {
+                            tmp = new ArrayList<>();
+                        }
+                        tmp.add(next);
+                        map.put("#", tmp);
                     }
                 } else {
                     List<JSONObject> tmp;
-                    if (map.containsKey("other")) {
-                        tmp = map.get("other");
-
+                    if (map.containsKey("#")) {
+                        tmp = map.get("#");
                     } else {
                         tmp = new ArrayList<>();
                     }
                     tmp.add(next);
-                    map.put("other", tmp);
+                    map.put("#", tmp);
                 }
                 iterator.remove();
             }
@@ -72,10 +80,10 @@ public class ClassifyByParam {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("firstLetter", entry.getKey());
                     jsonObject.put("list", entry.getValue());
-                    returnList.add(jsonObject);
+                    jsonArray.add(jsonObject);
                 }
             }
-            return AppMessage.successdata("0", sortList(returnList,"firstLetter",1), new Object[0]);
+            return AppMessage.successdata("0", sortList(jsonArray, "firstLetter", 1), new Object[0]);
 //
         } catch (Exception e) {
             e.fillInStackTrace();
@@ -91,8 +99,8 @@ public class ClassifyByParam {
             if (chars[i] > 128) {
                 try {
                     pinyin = pinyin + PinyinHelper.getShortPinyin(chars[i] + "").toUpperCase();
-                } catch (PinyinException var6) {
-                    var6.printStackTrace();
+                } catch (PinyinException e) {
+                    e.printStackTrace();
                 }
             } else {
                 pinyin = pinyin + chars[i];
@@ -102,11 +110,11 @@ public class ClassifyByParam {
         return pinyin;
     }
 
-    private List<JSONObject> sortList(List<JSONObject> list,String flag,int sequence) {
+    private List<JSONObject> sortList(List<JSONObject> list, String flag, int sequence) {
         Collections.sort(list, new Comparator<JSONObject>() {
             @Override
             public int compare(JSONObject o1, JSONObject o2) {
-                return (o1.getString(flag).compareTo(o2.getString(flag)))*Sequence.getEnum(sequence).getCode();
+                return (o1.getString(flag).compareTo(o2.getString(flag))) * Sequence.getEnum(sequence).getCode();
             }
         });
         return list;
@@ -159,7 +167,7 @@ public class ClassifyByParam {
                 List<String> fieldNames = new ArrayList();
                 Field[] fields = aClass.getSuperclass().getDeclaredFields();
                 int fieldLength = fields.length;
-                Arrays.asList(fields).forEach(n->fieldNames.add(n.getName()));
+                Arrays.asList(fields).forEach(n -> fieldNames.add(n.getName()));
                 if (fieldNames.contains(fieldName)) {
                     Object fieldValue = aClass.getSuperclass().getDeclaredMethod(getMethodName).invoke(next);
                     jsonObject.put(fieldName, fieldValue.toString());
@@ -195,10 +203,9 @@ public class ClassifyByParam {
 
     }
 
-    private enum  Sequence{
-        asc("升序",1),
-        desc("降序",-1)
-        ;
+    private enum Sequence {
+        asc("升序", 1),
+        desc("降序", -1);
         private String context;
         private Integer code;
 
@@ -214,15 +221,17 @@ public class ClassifyByParam {
         public Integer getCode() {
             return code;
         }
+
         public String getEnumName() {
             return this.getEnumName(this);
         }
+
         public static String getEnumName(Sequence sequence) {
             switch (sequence.getCode()) {
                 case 1:
-                    return Sequence.asc+"";
+                    return Sequence.asc + "";
                 case -1:
-                    return Sequence.desc+"";
+                    return Sequence.desc + "";
                 default:
                     break;
             }
@@ -245,7 +254,7 @@ public class ClassifyByParam {
         public static Sequence getEnum(int code) {
             switch (code) {
                 case -1:
-                    return  Sequence.desc;
+                    return Sequence.desc;
                 case 1:
                     return Sequence.asc;
                 default:

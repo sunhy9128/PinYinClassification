@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89d4cef3-626a-4459-8912-b84028ff461c" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ClassifyByParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ClassifyByParam.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,16 +19,11 @@
       <file leaf-file-name="ClassifyByParam.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/ClassifyByParam.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="169" column="11" selection-start-line="169" selection-start-column="11" selection-end-line="169" selection-end-column="11" />
+            <state relative-caret-position="422">
+              <caret line="69" column="28" lean-forward="true" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#9514#9515#0" expanded="true" />
-                <element signature="e#9552#9553#0" expanded="true" />
-                <element signature="e#9588#9589#0" expanded="true" />
-                <element signature="e#9623#9624#0" expanded="true" />
-                <element signature="e#9661#9662#0" expanded="true" />
-                <element signature="e#9714#9715#0" expanded="true" />
+                <element signature="class#Sequence#0;class#ClassifyByParam#0" />
               </folding>
             </state>
           </provider>
@@ -80,7 +76,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -111,7 +107,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -206,12 +202,13 @@
       <workItem from="1528852093253" duration="1243000" />
       <workItem from="1528853724900" duration="289000" />
       <workItem from="1528855960859" duration="958000" />
-      <workItem from="1531295393387" duration="201000" />
+      <workItem from="1531295393387" duration="729000" />
+      <workItem from="1531357802310" duration="435000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10463000" />
+    <option name="totallyTimeSpent" value="11426000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1680" height="956" extended-state="6" />
@@ -229,16 +226,15 @@
       <window_info id="UI Designer" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="bottom" id="Java Enterprise" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Spring" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.29832935" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.259828" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.2635135" />
       <window_info anchor="right" id="Bean Validation" order="4" />
       <window_info id="Web" order="3" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
@@ -246,6 +242,7 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="9" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -260,16 +257,22 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/ClassifyByParam.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2808">
+          <caret line="169" column="11" selection-start-line="169" selection-start-column="11" selection-end-line="169" selection-end-column="11" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#Sequence#0;class#ClassifyByParam#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ClassifyByParam.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="15" column="28" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9514#9515#0" expanded="true" />
-            <element signature="e#9552#9553#0" expanded="true" />
-            <element signature="e#9588#9589#0" expanded="true" />
-            <element signature="e#9623#9624#0" expanded="true" />
-            <element signature="e#9661#9662#0" expanded="true" />
-            <element signature="e#9714#9715#0" expanded="true" />
+            <element signature="class#Sequence#0;class#ClassifyByParam#0" />
           </folding>
         </state>
       </provider>
@@ -280,12 +283,7 @@
           <caret line="174" column="51" selection-start-line="174" selection-start-column="44" selection-end-line="174" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9514#9515#0" expanded="true" />
-            <element signature="e#9552#9553#0" expanded="true" />
-            <element signature="e#9588#9589#0" expanded="true" />
-            <element signature="e#9623#9624#0" expanded="true" />
-            <element signature="e#9661#9662#0" expanded="true" />
-            <element signature="e#9714#9715#0" expanded="true" />
+            <element signature="class#Sequence#0;class#ClassifyByParam#0" />
           </folding>
         </state>
       </provider>
@@ -296,12 +294,7 @@
           <caret line="228" column="24" lean-forward="true" selection-start-line="226" selection-start-column="23" selection-end-line="228" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9514#9515#0" expanded="true" />
-            <element signature="e#9552#9553#0" expanded="true" />
-            <element signature="e#9588#9589#0" expanded="true" />
-            <element signature="e#9623#9624#0" expanded="true" />
-            <element signature="e#9661#9662#0" expanded="true" />
-            <element signature="e#9714#9715#0" expanded="true" />
+            <element signature="class#Sequence#0;class#ClassifyByParam#0" />
           </folding>
         </state>
       </provider>
@@ -319,12 +312,7 @@
           <caret line="15" column="28" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9514#9515#0" expanded="true" />
-            <element signature="e#9552#9553#0" expanded="true" />
-            <element signature="e#9588#9589#0" expanded="true" />
-            <element signature="e#9623#9624#0" expanded="true" />
-            <element signature="e#9661#9662#0" expanded="true" />
-            <element signature="e#9714#9715#0" expanded="true" />
+            <element signature="class#Sequence#0;class#ClassifyByParam#0" />
           </folding>
         </state>
       </provider>
@@ -342,12 +330,7 @@
           <caret line="15" column="28" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9514#9515#0" expanded="true" />
-            <element signature="e#9552#9553#0" expanded="true" />
-            <element signature="e#9588#9589#0" expanded="true" />
-            <element signature="e#9623#9624#0" expanded="true" />
-            <element signature="e#9661#9662#0" expanded="true" />
-            <element signature="e#9714#9715#0" expanded="true" />
+            <element signature="class#Sequence#0;class#ClassifyByParam#0" />
           </folding>
         </state>
       </provider>
@@ -365,12 +348,7 @@
           <caret line="3" column="48" lean-forward="true" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9514#9515#0" expanded="true" />
-            <element signature="e#9552#9553#0" expanded="true" />
-            <element signature="e#9588#9589#0" expanded="true" />
-            <element signature="e#9623#9624#0" expanded="true" />
-            <element signature="e#9661#9662#0" expanded="true" />
-            <element signature="e#9714#9715#0" expanded="true" />
+            <element signature="class#Sequence#0;class#ClassifyByParam#0" />
           </folding>
         </state>
       </provider>
@@ -388,12 +366,7 @@
           <caret line="7" column="35" lean-forward="true" selection-start-line="7" selection-start-column="35" selection-end-line="7" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9514#9515#0" expanded="true" />
-            <element signature="e#9552#9553#0" expanded="true" />
-            <element signature="e#9588#9589#0" expanded="true" />
-            <element signature="e#9623#9624#0" expanded="true" />
-            <element signature="e#9661#9662#0" expanded="true" />
-            <element signature="e#9714#9715#0" expanded="true" />
+            <element signature="class#Sequence#0;class#ClassifyByParam#0" />
           </folding>
         </state>
       </provider>
@@ -519,16 +492,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ClassifyByParam.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="169" column="11" selection-start-line="169" selection-start-column="11" selection-end-line="169" selection-end-column="11" />
+        <state relative-caret-position="422">
+          <caret line="69" column="28" lean-forward="true" selection-start-line="69" selection-start-column="28" selection-end-line="69" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#9514#9515#0" expanded="true" />
-            <element signature="e#9552#9553#0" expanded="true" />
-            <element signature="e#9588#9589#0" expanded="true" />
-            <element signature="e#9623#9624#0" expanded="true" />
-            <element signature="e#9661#9662#0" expanded="true" />
-            <element signature="e#9714#9715#0" expanded="true" />
+            <element signature="class#Sequence#0;class#ClassifyByParam#0" />
           </folding>
         </state>
       </provider>
