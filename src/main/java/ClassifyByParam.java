@@ -4,6 +4,8 @@ import com.github.stuxuhai.jpinyin.PinyinException;
 import com.github.stuxuhai.jpinyin.PinyinHelper;
 import com.xiaoniu.core.base.BaseEntity;
 import com.xiaoniu.core.support.AppMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.OneToMany;
 import java.lang.annotation.Annotation;
@@ -15,7 +17,9 @@ import java.util.*;
 
 public class ClassifyByParam {
 
-    public <T> AppMessage classifyByParam(List<T> list, String flag, List<String> args) {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassifyByParam.class);
+
+    public <T> AppMessage classify(List<T> list, String flag, List<String> args) {
         try {
             Class<?> aClass = list.get(0).getClass();
             String ffield = flag.substring(0, 1).toUpperCase() + flag.substring(1);
@@ -99,8 +103,8 @@ public class ClassifyByParam {
             if (chars[i] > 128) {
                 try {
                     pinyin = pinyin + PinyinHelper.getShortPinyin(chars[i] + "").toUpperCase();
-                } catch (PinyinException e) {
-                    e.printStackTrace();
+                } catch (PinyinException var6) {
+                    var6.printStackTrace();
                 }
             } else {
                 pinyin = pinyin + chars[i];
@@ -120,43 +124,43 @@ public class ClassifyByParam {
         return list;
     }
 
-    private <T> List<T> sortList(List<T> list, String flag) {
-        try {
-            if (list == null) {
-                return null;
-            } else if (list.isEmpty()) {
-                return new ArrayList();
-            } else {
-                Class<?> aClass = list.get(0).getClass();
-                String ffield = flag.substring(0, 1).toUpperCase() + flag.substring(1);
-                final Method classDeclaredMethod = aClass.getDeclaredMethod("get" + ffield);
-                Collections.sort(list, new Comparator<T>() {
-                    public int compare(T o1, T o2) {
-                        Method finalMethod = classDeclaredMethod;
-                        Collator collator = Collator.getInstance(Locale.CHINA);
-
-                        try {
-                            if (finalMethod.invoke(o1) == null || finalMethod.invoke(o2) == null) {
-                                return 0;
-                            } else {
-                                return collator.compare(finalMethod.invoke(o1), finalMethod.invoke(o2));
-                            }
-                        } catch (IllegalAccessException e) {
-                            e.printStackTrace();
-                        } catch (InvocationTargetException e) {
-                            e.printStackTrace();
-                        }
-
-                        return -1;
-                    }
-                });
-                return list;
-            }
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            return new ArrayList();
-        }
-    }
+//    private <T> List<T> sortList(List<T> list, String flag) {
+//        try {
+//            if (list == null) {
+//                return null;
+//            } else if (list.isEmpty()) {
+//                return new ArrayList();
+//            } else {
+//                Class<?> aClass = list.get(0).getClass();
+//                String ffield = flag.substring(0, 1).toUpperCase() + flag.substring(1);
+//                final Method classDeclaredMethod = aClass.getDeclaredMethod("get" + ffield);
+//                Collections.sort(list, new Comparator<T>() {
+//                    public int compare(T o1, T o2) {
+//                        Method finalMethod = classDeclaredMethod;
+//                        Collator collator = Collator.getInstance(Locale.CHINA);
+//
+//                        try {
+//                            if (finalMethod.invoke(o1) == null || finalMethod.invoke(o2) == null) {
+//                                return 0;
+//                            } else {
+//                                return collator.compare(finalMethod.invoke(o1), finalMethod.invoke(o2));
+//                            }
+//                        } catch (IllegalAccessException e) {
+//                            e.printStackTrace();
+//                        } catch (InvocationTargetException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                        return -1;
+//                    }
+//                });
+//                return list;
+//            }
+//        } catch (NoSuchMethodException e) {
+//            e.printStackTrace();
+//            return new ArrayList();
+//        }
+//    }
 
     private <T> JSONObject getInvoke(Class aClass, List<String> args, T next) {
         try {
@@ -204,8 +208,7 @@ public class ClassifyByParam {
     }
 
     private enum Sequence {
-        asc("升序", 1),
-        desc("降序", -1);
+        asc("升序", 1), desc("降序", -1);
         private String context;
         private Integer code;
 
