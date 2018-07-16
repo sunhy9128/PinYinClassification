@@ -15,7 +15,7 @@ import java.util.*;
 
 public class ClassifyByParam {
 
-    public <T> AppMessage classify(List<T> list, String flag, List<String> args) {
+    public <T> AppMessage classifyByParam(List<T> list, String flag, List<String> args) {
         try {
             Class<?> aClass = list.get(0).getClass();
             String ffield = flag.substring(0, 1).toUpperCase() + flag.substring(1);
@@ -84,7 +84,7 @@ public class ClassifyByParam {
                 }
             }
             return AppMessage.successdata("0", sortList(jsonArray, "firstLetter", 1), new Object[0]);
-//
+
         } catch (Exception e) {
             e.fillInStackTrace();
         }
